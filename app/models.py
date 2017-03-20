@@ -15,11 +15,39 @@ class Profile(models.Model):
 	date = models.DateTimeField(default=datetime.now())
 	avtar = models.ImageField(upload_to = '/avatar', default = '/avatar/no-img.jpg', null=True)
 
+	def __str__(self):
+		return u'%s'%self.user
+
 class Blog(models.Model):
-	user = models.ForeignKey(User, null=True)
 	title = models.CharField(max_length=200, null=True)
 	content = models.TextField(null=True)
+	user = models.ForeignKey(User, null=True)
 	created = models.DateTimeField(auto_now_add = True, auto_now = False)
 	updated = models.DateTimeField(auto_now_add = True, auto_now = False)
 	image = models.ImageField(upload_to = '', default = 'no-img.jpg')
 	rate = models.IntegerField(default =0)
+
+	def __str__(self):
+		return u'%s'%self.title
+
+class Comment(models.Model):
+	fullname = models.CharField(max_length=45, null=True)
+	comment = models.TextField(null=True)
+	blog = models.ForeignKey(Blog, null=True)
+	created = models.DateTimeField(auto_now_add = True, auto_now = False)
+	updated = models.DateTimeField(auto_now_add = True, auto_now = False)
+	like = models.IntegerField(default =0)
+
+	def __str__(self):
+		return u'%s'%self.fullname
+
+class ReplayComment(models.Model):
+	comment = models.ForeignKey(Comment, null=True)
+	fullname = models.CharField(max_length=45, null=True)
+	reply = models.TextField()
+	created = models.DateTimeField(auto_now_add = True, auto_now = False)
+	updated = models.DateTimeField(auto_now_add = True, auto_now = False)
+	like = models.IntegerField(default =0)
+
+	def __str__(self):
+		return u'%s'%self.comment
