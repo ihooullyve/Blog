@@ -30,6 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

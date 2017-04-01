@@ -30,6 +30,7 @@ class Blog(models.Model):
 	def __str__(self):
 		return u'%s'%self.title
 
+
 class Comment(models.Model):
 	fullname = models.CharField(max_length=45, null=True)
 	comment = models.TextField(null=True)
